@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="TinyURLDbContext-Web.config Connection String" description="TinyURLDbContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TinyURLDb;Integrated Security=SSPI" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\jonpa\\Documents\\GitHub\\SMGTinyUrlTest\\SMG\ Mobile\ Test\\TinyURLTest\\TinyURL\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TinyURLDbContext']/@connectionString" />
+  </parameter>
+</parameters>

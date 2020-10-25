@@ -1,0 +1,12 @@
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\bin\Release\TinyURL.Data.dll.config
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\bin\Release\TinyURL.Data.dll
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\bin\Release\TinyURL.Data.pdb
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\bin\Release\EntityFramework.dll
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\bin\Release\EntityFramework.xml
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\obj\Release\TinyURL.Data.csprojAssemblyReference.cache
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\obj\Release\TinyURL.Data.csproj.CoreCompileInputs.cache
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\obj\Release\TinyURL.Data.csproj.CopyComplete
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\obj\Release\TinyURL.Data.dll
+C:\Users\jonpa\Documents\GitHub\SMGTinyUrlTest\SMG Mobile Test\TinyURLTest\TinyURL.Data\obj\Release\TinyURL.Data.pdb
