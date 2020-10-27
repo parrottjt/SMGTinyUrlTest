@@ -50,11 +50,10 @@ namespace TinyURL.Web.Controllers
                 try
                 {
                     string path = Path.Combine(Server.MapPath(filePath), Path.GetFileName(file.FileName));
-                    var image = new UploadedImage { FileName = file.FileName, TinyURL = CreateTinyUrl(path)
-                    };
+                    var image = new UploadedImage { FileName = file.FileName, TinyURL = CreateTinyUrl(path)};
 
                     db.AddUploadedImage(image);
-                    return RedirectToAction("Details", new { id = image.Id });
+                    return View(image);
                 }
                 catch (Exception)
                 {
@@ -75,7 +74,6 @@ namespace TinyURL.Web.Controllers
         /// <param name="file"></param>
         void ValidateFile(HttpPostedFileBase file)
         {
-            
             string fileExtension = Path.GetExtension(file.FileName);
             List<string> validExtensions = new List<string>
             {
