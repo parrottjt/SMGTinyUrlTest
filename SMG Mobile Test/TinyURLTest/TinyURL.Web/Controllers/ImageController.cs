@@ -46,10 +46,9 @@ namespace TinyURL.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ValidateFile(file);
+                ValidateFile(file, out var path);
                 try
                 {
-                    string path = Path.Combine(Server.MapPath(filePath), Path.GetFileName(file.FileName));
                     var image = new UploadedImage { FileName = file.FileName, TinyURL = CreateTinyUrl(path)};
 
                     db.AddUploadedImage(image);
@@ -72,7 +71,7 @@ namespace TinyURL.Web.Controllers
         /// 
         /// </summary>
         /// <param name="file"></param>
-        void ValidateFile(HttpPostedFileBase file)
+        void ValidateFile(HttpPostedFileBase file, out string path)
         {
             string fileExtension = Path.GetExtension(file.FileName);
             List<string> validExtensions = new List<string>
@@ -90,6 +89,8 @@ namespace TinyURL.Web.Controllers
 
             string validationStatus;
 
+            path = "Not Valid";
+
             if (!validExtensions.Contains(fileExtension.ToLower()))
             {
                 validationStatus = $"Valid file types are HEIC/HEIF, WEBP, PNG, JPEG, SVG, PDF, JPG & GIF\n" +
@@ -104,7 +105,7 @@ namespace TinyURL.Web.Controllers
                 else
                 {
                     validationStatus = "File uploaded successful";
-                    string path = Path.Combine(Server.MapPath(filePath), Path.GetFileName(file.FileName));
+                    path = Path.Combine(Server.MapPath(filePath), Path.GetFileName(file.FileName));
                     file.SaveAs(path);
                 }
             }
