@@ -17,7 +17,8 @@ namespace TinyURL.Web.Controllers
     public class ImageController : Controller
     {
         readonly IUploadedImage db;
-        string filePath = "/Content/Uploaded_Images";
+
+        string errorMessage;
 
         public ImageController(IUploadedImage uploadedImageDatabase)
         {
@@ -41,7 +42,8 @@ namespace TinyURL.Web.Controllers
             return View(model);
         }
 
-        [ValidateAntiForgeryToken][HttpPost]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public ActionResult UploadFile(HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
@@ -49,15 +51,17 @@ namespace TinyURL.Web.Controllers
                 ValidateFile(file, out var path);
                 try
                 {
-                    var image = new UploadedImage { FileName = file.FileName, TinyURL = CreateTinyUrl(path)};
 
+                    var image = new UploadedImage { FileName = file.FileName, TinyURL = CreateTinyUrl(path) };
                     db.AddUploadedImage(image);
                     return View(image);
-                }
-                catch (Exception)
-                {
 
-                    throw;
+
+                }
+                catch (Exception exceptionType)
+                {
+                    ViewBag.Error = exceptionType.Message;
+                    return View();
                 }
             }
 
@@ -73,46 +77,55 @@ namespace TinyURL.Web.Controllers
         /// <param name="file"></param>
         void ValidateFile(HttpPostedFileBase file, out string path)
         {
-            string fileExtension = Path.GetExtension(file.FileName);
-            List<string> validExtensions = new List<string>
+            try
             {
-                ".heic",
-                ".heif",
-                ".webp",
-                ".png",
-                ".jpeg",
-                ".svg",
-                ".pdf",
-                ".jpg",
-                ".gif"
-            };
-
-            string validationStatus;
-
-            path = "Not Valid";
-
-            if (!validExtensions.Contains(fileExtension.ToLower()))
-            {
-                validationStatus = $"Valid file types are HEIC/HEIF, WEBP, PNG, JPEG, SVG, PDF, JPG & GIF\n" +
-                                   $"File uploaded had type {fileExtension}";
-            }
-            else
-            {
-                if (file.ContentLength > 10000000)
+                string fileExtension = file.FileName.Split('.')[1];
+                List<string> validExtensions = new List<string>
                 {
-                    validationStatus = "Upload size limited to 10MB";
+                    "heic",
+                    "heif",
+                    "webp",
+                    "png",
+                    "jpeg",
+                    "svg",
+                    "pdf",
+                    "jpg",
+                    "gif"
+                };
+
+                string validationStatus;
+
+                path = "Not Valid";
+
+                if (!validExtensions.Contains(fileExtension.ToLower()))
+                {
+                    validationStatus = $"Valid file types are HEIC/HEIF, WEBP, PNG, JPEG, SVG, PDF, JPG & GIF\n" +
+                                       $"File uploaded had type {fileExtension}";
                 }
                 else
                 {
-                    validationStatus = "File uploaded successful";
-                    path = Path.Combine(Server.MapPath(filePath), Path.GetFileName(file.FileName));
-                    file.SaveAs(path);
+                    if (file.ContentLength > 10000000)
+                    {
+                        validationStatus = "Upload size limited to 10MB";
+                    }
+                    else
+                    {
+                        validationStatus = "File uploaded successful";
+                        path = Server.MapPath($"~/{file.FileName}");
+                        file.SaveAs(path);
+                    }
                 }
+
+                ViewBag.ValidationStatus = validationStatus;
+            }
+            catch (Exception exceptionType)
+            {
+                path = "";
+                ViewBag.ValidationStatus = $"File Couldn't be processed with exception: {exceptionType.Message}";
+                RedirectToAction("Index");
             }
 
-            ViewBag.ValidationStatus = validationStatus;
         }
-
 
         /// <summary>
         /// 
@@ -144,8 +157,7 @@ namespace TinyURL.Web.Controllers
             {
 
                 return url;
-            } 
+            }
         }
-
     }
 }

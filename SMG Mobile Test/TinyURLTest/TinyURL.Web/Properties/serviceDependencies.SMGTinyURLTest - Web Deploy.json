@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/tinyurlwebdbserver/databases/SMGTestDataBase",
+      "type": "mssql.azure",
+      "connectionId": "SMGTestDataBase",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

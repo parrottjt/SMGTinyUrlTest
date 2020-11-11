@@ -13,6 +13,11 @@ namespace TinyURL.Data.Services
             return db.OrderBy(image => image.Id);
         }
 
+        public bool IsConnectionValid()
+        {
+            return false;
+        }
+
         public UploadedImage Get(int id)
         {
             return db.FirstOrDefault(image => image.Id == id);

@@ -21,6 +21,11 @@ namespace TinyURL.Data.Services
             return images;
         }
 
+        public bool IsConnectionValid()
+        {
+            return db.Database.Exists();
+        }
+
         public UploadedImage Get(int id)
         {
             return db.UploadedImages.FirstOrDefault(image => image.Id == id);

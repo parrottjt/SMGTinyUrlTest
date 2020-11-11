@@ -7,6 +7,7 @@ namespace TinyURL.Data.Services
     public interface IUploadedImage
     {
         IEnumerable<UploadedImage> GetAll();
+        bool IsConnectionValid();
         UploadedImage Get(int id);
         UploadedImage Get(string url);
         void AddUploadedImage(UploadedImage uploadedImages);
