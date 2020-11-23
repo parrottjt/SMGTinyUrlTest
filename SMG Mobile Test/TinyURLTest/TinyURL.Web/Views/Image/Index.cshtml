@@ -2,6 +2,20 @@
 
 @{
     ViewBag.Title = "Index";
+    WebImage uploadedImage = null;
+    var newFileName = "";
+    var pathToImage = "";
+
+    if (IsPost)
+    {
+        uploadedImage = WebImage.GetImageFromRequest();
+        if (uploadedImage != null)
+        {
+            newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(uploadedImage.FileName);
+            pathToImage = "Content/ " + newFileName;
+            uploadedImage.Save("~/" + pathToImage);
+        }
+    }
 }
 
 <h2>Index</h2>
