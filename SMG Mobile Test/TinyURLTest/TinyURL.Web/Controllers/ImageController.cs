@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
 using System.Web;
-using System.Web.Hosting;
 using System.Web.Mvc;
 using TinyURL.Data.Models;
 using TinyURL.Data.Services;
-using TinyURL.Web.Models;
 
 namespace TinyURL.Web.Controllers
 {
@@ -49,19 +45,16 @@ namespace TinyURL.Web.Controllers
             if (ModelState.IsValid)
             {
                 ValidateFile(file, out var path);
+                var image = new UploadedImage { FileName = file.FileName, TinyURL = CreateTinyUrl(path) };
                 try
                 {
-
-                    var image = new UploadedImage { FileName = file.FileName, TinyURL = CreateTinyUrl(path) };
-                    db.AddUploadedImage(image);
+                    //db.AddUploadedImage(image);
                     return View(image);
-
-
                 }
                 catch (Exception exceptionType)
                 {
                     ViewBag.Error = exceptionType.Message;
-                    return View();
+                    return View(image);
                 }
             }
 
@@ -112,7 +105,8 @@ namespace TinyURL.Web.Controllers
                     {
                         validationStatus = "File uploaded successful";
                         path = Server.MapPath($"~/{file.FileName}");
-                        file.SaveAs(path);
+                        Image img = Image.FromFile(file.FileName);
+                        img.Save(path);
                     }
                 }
 
