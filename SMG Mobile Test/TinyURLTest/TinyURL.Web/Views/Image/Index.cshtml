@@ -12,7 +12,7 @@
         if (uploadedImage != null)
         {
             newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(uploadedImage.FileName);
-            pathToImage = "Content/ " + newFileName;
+            pathToImage = "Content/" + newFileName;
             uploadedImage.Save("~/" + pathToImage);
         }
     }
@@ -31,11 +31,13 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
-        @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.file, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-            @Html.ValidationMessageFor(model => model.file, "", new { @class = "text-danger" })
-        </div>
+        <form action="" method="post" enctype="multipart/form-data">
+            @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.file, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                @Html.ValidationMessageFor(model => model.file, "", new { @class = "text-danger" })
+            </div>
+        </form>
     </div>
 
     <div class="form-group">

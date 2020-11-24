@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using TinyURL.Data.Models;
 using TinyURL.Data.Services;
@@ -135,7 +136,7 @@ namespace TinyURL.Web.Controllers
         {
             try
             {
-                var request = WebRequest.Create("http://tinyurl.com/api-create.php?url=" + Server.MapPath(url));
+                var request = WebRequest.Create("http://tinyurl.com/api-create.php?url=" + (url));
                 var response = request.GetResponse();
 
                 string tinyUrl;
