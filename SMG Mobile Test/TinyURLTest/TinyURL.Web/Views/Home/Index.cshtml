@@ -1,5 +1,7 @@
 ﻿@using TinyURL.Data.Models
 @{
+    ViewBag.Title = "Upload Image";
+
     WebImage photo = null;
     string newFileName = "";
     string imagePath = "";
@@ -95,11 +97,12 @@
         }
 
     }
-
-
 }
 
-
+@{
+    // Gathered from https://docs.microsoft.com/en-us/aspnet/web-pages/overview/ui-layouts-and-themes/9-working-with-images
+    // Added the tiny url to this location.
+}
 <div class="page-header">
     <form action="" method="post" enctype="multipart/form-data">
         <fieldset>

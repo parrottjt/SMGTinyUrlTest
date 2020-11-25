@@ -21,5 +21,16 @@ namespace TinyURL.Web.Controllers
             var model = db;
             return View(model);
         }
+
+        public ActionResult Images()
+        {
+            var model = db.GetAll();
+            return View(model);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

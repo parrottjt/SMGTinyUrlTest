@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Images";
+}
+
+<h2>Images</h2>
+<p>
+    @Html.ActionLink("Create New", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Image Name
+        </th>
+        <th>
+            Tiny URL Link
+        </th>
+        <th>
+            Delete
+        </th>
+    </tr>
+
+    <!--
+    @foreach (var image in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => image.FileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => image.TinyURL)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = image.Id }, new { @class = "text-black-50" })
+            </td>
+        </tr>
+    }
+    -->
+
+</table>

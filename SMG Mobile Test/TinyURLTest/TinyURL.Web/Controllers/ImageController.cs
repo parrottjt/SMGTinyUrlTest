@@ -11,6 +11,8 @@ using TinyURL.Data.Services;
 
 namespace TinyURL.Web.Controllers
 {
+    //This was the old way that I was using to get the image to function properly
+
     public class ImageController : Controller
     {
         readonly IUploadedImage db;
