@@ -1,13 +1,38 @@
-﻿@{  
+﻿@using TinyURL.Data.Models
+@{
     WebImage photo = null;
     string newFileName = "";
     string imagePath = "";
 
-    if(IsPost){
+    if (IsPost)
+    {
         photo = WebImage.GetImageFromRequest();
-        if(photo != null)
+        if (photo != null)
         {
             ValidateFile(photo, out var pathToImage);
+        }
+    }
+
+    string CreateTinyUrl(string url)
+    {
+        try
+        {
+            var request = WebRequest.Create("http://tinyurl.com/api-create.php?url=" + "smgtinyurltest.azurewebsites.net/" + url);
+            var response = request.GetResponse();
+
+            string tinyUrl;
+
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+                tinyUrl = reader.ReadToEnd();
+            }
+
+            return tinyUrl;
+        }
+        catch (Exception exception)
+        {
+
+            return exception.Message;
         }
     }
 
@@ -17,7 +42,7 @@
         {
             string fileExtension = file.FileName.Split('.')[1];
             List<string> validExtensions = new List<string>
-            {
+{
                 "heic",
                 "heif",
                 "webp",
@@ -53,6 +78,10 @@
 
                     photo.Save(@"~\" + imagePath);
 
+                    var databaseImageItem = new UploadedImage { FileName = photo.FileName, TinyURL = CreateTinyUrl(imagePath) };
+
+                    Model.AddUploadImage(databaseImageItem);
+
                     path = imagePath;
                 }
             }
@@ -67,28 +96,7 @@
 
     }
 
-    string CreateTinyUrl(string url)
-    {
-        try
-        {
-            var request = WebRequest.Create("http://tinyurl.com/api-create.php?url=" + "smgtinyurltest.azurewebsites.net/" + url);
-            var response = request.GetResponse();
 
-            string tinyUrl;
-
-            using (var reader = new StreamReader(response.GetResponseStream()))
-            {
-                tinyUrl = reader.ReadToEnd();
-            }
-
-            return tinyUrl;
-        }
-        catch (Exception exception)
-        {
-
-            return exception.Message;
-        }
-    }
 }
 
 
@@ -98,15 +106,16 @@
             <legend> Upload Image </legend>
             <label for="Image">Image</label>
             <input type="file" name="Image" />
-            <br/>
+            <br />
             <input type="submit" value="Upload" />
         </fieldset>
     </form>
     <h1>Uploaded Image</h1>
-    @if(imagePath != ""){
+    @if (imagePath != "")
+    {
         <div class="result">
             <p>Tiny URL: @CreateTinyUrl(imagePath)</p>
-            <img src="@imagePath" alt="image"/>
+            <img src="@imagePath" alt="image" />
 
         </div>
     }
