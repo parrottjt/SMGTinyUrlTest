@@ -1,0 +1,36 @@
+﻿@model TinyURL.Web.Models.ImageViewModel
+@{
+    ViewBag.Title = "Images";
+
+    string[] fileNames = Directory.GetFiles(Server.MapPath("~/UploadedImages/"));
+}
+
+<h2>Images</h2>
+
+<p>
+    @Html.ActionLink("Upload New Image", "Index")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Image Name
+        </th>
+        <th>
+            Tiny URL Link
+        </th>
+    </tr>
+
+    @foreach (var file in fileNames)
+    {
+        var fileName = file.Split(@"\".ToCharArray())[5];
+        <tr>
+            <td>
+                <p>@fileName</p>
+            </td>
+            <td>
+                <p>@Model.CreateTinyUrl(@"UploadedImages\" + fileName)</p>
+            </td>
+        </tr>
+    }
+</table>

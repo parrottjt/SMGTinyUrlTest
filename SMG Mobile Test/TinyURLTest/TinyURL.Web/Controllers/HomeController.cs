@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TinyURL.Data.Services;
+using TinyURL.Web.Models;
 
 namespace TinyURL.Web.Controllers
 {
@@ -18,13 +19,13 @@ namespace TinyURL.Web.Controllers
 
         public ActionResult Index()
         {
-            var model = db;
+            var model = new ImageViewModel();
             return View(model);
         }
 
-        public ActionResult Images()
+        public ActionResult List()
         {
-            var model = db.GetAll();
+            var model = new ImageViewModel();
             return View(model);
         }
 

@@ -266,6 +266,7 @@
     <Content Include="Views\Image\Details.cshtml" />
     <Content Include="Views\Image\UploadFile.cshtml" />
     <Content Include="Views\Home\Images.cshtml" />
+    <Content Include="Views\Home\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

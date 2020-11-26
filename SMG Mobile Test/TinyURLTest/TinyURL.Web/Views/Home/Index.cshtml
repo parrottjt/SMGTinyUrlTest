@@ -1,101 +1,23 @@
-﻿@using TinyURL.Data.Models
+﻿@model TinyURL.Web.Models.ImageViewModel
 @{
+    // I had to place my logic in this file as I couldn't get the database to connect
+
     ViewBag.Title = "Upload Image";
 
     WebImage photo = null;
-    string newFileName = "";
-    string imagePath = "";
+
+    bool fileExists = false;
+
+    string pathToImage = "";
+    string validationMessage = "";
 
     if (IsPost)
     {
         photo = WebImage.GetImageFromRequest();
         if (photo != null)
         {
-            ValidateFile(photo, out var pathToImage);
+            Model.ValidateFile(photo, out pathToImage, out fileExists, out validationMessage);
         }
-    }
-
-    string CreateTinyUrl(string url)
-    {
-        try
-        {
-            var request = WebRequest.Create("http://tinyurl.com/api-create.php?url=" + "smgtinyurltest.azurewebsites.net/" + url);
-            var response = request.GetResponse();
-
-            string tinyUrl;
-
-            using (var reader = new StreamReader(response.GetResponseStream()))
-            {
-                tinyUrl = reader.ReadToEnd();
-            }
-
-            return tinyUrl;
-        }
-        catch (Exception exception)
-        {
-
-            return exception.Message;
-        }
-    }
-
-    void ValidateFile(WebImage file, out string path)
-    {
-        try
-        {
-            string fileExtension = file.FileName.Split('.')[1];
-            List<string> validExtensions = new List<string>
-{
-                "heic",
-                "heif",
-                "webp",
-                "png",
-                "jpeg",
-                "svg",
-                "pdf",
-                "jpg",
-                "gif"
-            };
-
-            string validationStatus;
-
-            path = "Not Valid";
-
-            if (!validExtensions.Contains(fileExtension.ToLower()))
-            {
-                validationStatus = $"Valid file types are HEIC/HEIF, WEBP, PNG, JPEG, SVG, PDF, JPG & GIF\n" +
-                                   $"File uploaded had type {fileExtension}";
-            }
-            else
-            {
-                if (file.GetBytes().Length > 10000000)
-                {
-                    validationStatus = "Upload size limited to 10MB";
-                }
-                else
-                {
-                    validationStatus = "File uploaded successful";
-                    newFileName = Guid.NewGuid().ToString() + "_" +
-                                  Path.GetFileName(photo.FileName);
-                    imagePath = @"UploadedImages\" + newFileName;
-
-                    photo.Save(@"~\" + imagePath);
-
-                    var databaseImageItem = new UploadedImage { FileName = photo.FileName, TinyURL = CreateTinyUrl(imagePath) };
-
-                    Model.AddUploadImage(databaseImageItem);
-
-                    path = imagePath;
-                }
-            }
-
-            ViewBag.ValidationStatus = validationStatus;
-        }
-        catch (Exception exceptionType)
-        {
-            path = "";
-            ViewBag.ValidationStatus = $"File Couldn't be processed with exception: {exceptionType.Message}";
-        }
-
     }
 }
 
@@ -104,6 +26,9 @@
     // Added the tiny url to this location.
 }
 <div class="page-header">
+    <p>
+        @Html.ActionLink("List", "List", "Home")
+    </p>
     <form action="" method="post" enctype="multipart/form-data">
         <fieldset>
             <legend> Upload Image </legend>
@@ -111,14 +36,16 @@
             <input type="file" name="Image" />
             <br />
             <input type="submit" value="Upload" />
+            <br/>
+            <p>@ViewBag.ValidationStatus</p>
         </fieldset>
     </form>
     <h1>Uploaded Image</h1>
-    @if (imagePath != "")
+    @if (pathToImage != "" && !fileExists)
     {
         <div class="result">
-            <p>Tiny URL: @CreateTinyUrl(imagePath)</p>
-            <img src="@imagePath" alt="image" />
+            <p>Tiny URL: @Model.CreateTinyUrl(pathToImage)</p>
+            <img src="@pathToImage" alt="image" />
 
         </div>
     }
