@@ -1,7 +1,6 @@
-﻿@model TinyURL.Web.Models.ImageViewModel
+﻿@using System.Activities.Statements
+@model TinyURL.Web.Models.ImageViewModel
 @{
-    // I had to place my logic in this file as I couldn't get the database to connect
-
     ViewBag.Title = "Upload Image";
 
     WebImage photo = null;
@@ -11,11 +10,13 @@
     string pathToImage = "";
     string validationMessage = "";
 
+    //This handles the post from the Upload button
     if (IsPost)
     {
         photo = WebImage.GetImageFromRequest();
         if (photo != null)
         {
+            //This Validates the file to ensure it is of the proper format
             Model.ValidateFile(photo, out pathToImage, out fileExists, out validationMessage);
         }
     }
