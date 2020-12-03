@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="SMGTinyURLTest" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\jonpa\\Documents\\GitHub\\SMGTinyUrlTest\\SMG\ Mobile\ Test\\TinyURLTest\\TinyURL\.Web\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\jonpa\\Documents\\GitHub\\SMGTinyUrlTest\\SMG\ Mobile\ Test\\TinyURLTest\\TinyURL\.Web\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="TinyURL.Data.Services.TinyURLDbContext-Web.config Connection String" description="" value="TinyURL.Data.Services.TinyURLDbContext_ConnectionString" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\jonpa\\Documents\\GitHub\\SMGTinyUrlTest\\SMG\ Mobile\ Test\\TinyURLTest\\TinyURL\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TinyURL.Data.Services.TinyURLDbContext']/@connectionString" />
+  </parameter>
+  <parameter name="SMGTestDataBase-Web.config Connection String" description="SMGTestDataBase Connection String used in web.config by the application to access the database." value="Server=tcp:tinyurlwebdbserver.database.windows.net,1433;Initial Catalog=SMGTestDataBase;User ID=parrottjt@tinyurlwebdbserver;Password=Unity123password;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\jonpa\\Documents\\GitHub\\SMGTinyUrlTest\\SMG\ Mobile\ Test\\TinyURLTest\\TinyURL\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SMGTestDataBase']/@connectionString" />
+  </parameter>
+</parameters>

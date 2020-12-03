@@ -34,7 +34,7 @@ namespace TinyURL.Web.Models
             }
         }
 
-        public void ValidateFile(WebImage webImage, out string path, out bool fileExists, out string validationMessage)
+        public void ValidateFile(HttpPostedFile webImage, out string path, out bool fileExists, out string validationMessage)
         {
             string newFileName = "";
             try
@@ -65,7 +65,7 @@ namespace TinyURL.Web.Models
                 }
                 else
                 {
-                    if (webImage.GetBytes().Length > 10000000)
+                    if (webImage.ContentLength > 10000000)
                     {
                         validationStatus = "Upload size limited to 10MB";
                         fileExists = true;
@@ -73,7 +73,7 @@ namespace TinyURL.Web.Models
                     else
                     {
                         newFileName = Path.GetFileName(webImage.FileName);
-                        path = @"UploadedImages\" + newFileName;
+                        path = @"UploadedImages\" + webImage.FileName;
 
 
                         try
@@ -92,7 +92,7 @@ namespace TinyURL.Web.Models
 
                         if (!fileExists)
                         {
-                            webImage.Save(@"~\" + path);
+                            webImage.SaveAs(@"~\" + path);
                         }
                     }
                 }
