@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using TinyURL.Web.Models;
 
 namespace TinyURL.Web
@@ -12,19 +14,18 @@ namespace TinyURL.Web
     {
         public void ProcessRequest(HttpContext context)
         {
+            var model = new ImageViewModel();
+            context.Response.Write("Processing Request");
             string validationMessage = "";
+            HttpFileCollection files = context.Request.Files;
             if (context.Request.Files.Count > 0)
             {
-                HttpFileCollection files = context.Request.Files;
-                foreach (string file in files)
+                if (files.Count > 0)
                 {
-                    try
+                    for (int i = 0; i < files.Count; i++)
                     {
-                        var model = new ImageViewModel();
-                        model.ValidateFile(files[file], out string path, out bool fileExists, out validationMessage);
-                    }
-                    catch
-                    {
+                        HttpPostedFile file = files[i];
+                        model.ValidateFile(file);
                     }
                 }
             }

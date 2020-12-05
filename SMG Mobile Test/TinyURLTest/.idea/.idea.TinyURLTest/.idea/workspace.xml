@@ -1,9 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="606ab787-2a99-4f37-9458-842531d45108" name="Default Changelist" comment="Changed FileUpload.ashx to correctly use the FileUpload">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TinyURLTest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TinyURLTest/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/TinyURLTest/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/TinyURLTest/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Data/obj/Debug/TinyURL.Data.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Data/obj/Debug/TinyURL.Data.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/FileUpload.ashx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/FileUpload.ashx.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/Models/ImageViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/Models/ImageViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/TinyURL.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/TinyURL.Web.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/Views/Home/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/Views/Image/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/Views/Image/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/Views/Shared/Error.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/Views/Shared/Error.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/bin/TinyURL.Web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/bin/TinyURL.Web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/bin/TinyURL.Web.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/bin/TinyURL.Web.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Debug/TinyURL.Web.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Debug/TinyURL.Web.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Debug/TinyURL.Web.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Debug/TinyURL.Web.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Debug/TinyURL.Web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Debug/TinyURL.Web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Debug/TinyURL.Web.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Debug/TinyURL.Web.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/FileUpload.ashx" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/FileUpload.ashx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/Views/Home/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/Views/Image/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/Views/Image/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/Views/Shared/Error.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/Views/Shared/Error.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/bin/TinyURL.Web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/bin/TinyURL.Web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/bin/TinyURL.Web.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Release/Package/PackageTmp/bin/TinyURL.Web.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Release/TinyURL.Web.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Release/TinyURL.Web.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Release/TinyURL.Web.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Release/TinyURL.Web.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Release/TinyURL.Web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Release/TinyURL.Web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyURL.Web/obj/Release/TinyURL.Web.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TinyURL.Web/obj/Release/TinyURL.Web.pdb" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/TinyURL.Web/FileUpload.ashx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///ImageViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TinyURL.Web/Controllers/ImageController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///FileUpload.ashx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TinyURL.Web/Models/ImageViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///ImageViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TinyURL.Web/Views/Image/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/TinyURL.Web/FileUpload.ashx" />
+        <option value="$PROJECT_DIR$/TinyURL.Web/Views/Image/Index.cshtml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1l8DiqalOHhbPuX664JrKJWOS2c" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration name="TinyURL.Web" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/TinyURL.Web/TinyURL.Web.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="Web" />
+      <option name="PROJECT_TFM" value="" />
+      <browser url="https://localhost:44305/" start="true" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="606ab787-2a99-4f37-9458-842531d45108" name="Default Changelist" comment="" />
+      <created>1606969956365</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606969956365</updated>
+      <workItem from="1606969981536" duration="1237000" />
+    </task>
+    <task id="LOCAL-00001" summary="Changed FileUpload.ashx to correctly use the FileUpload">
+      <created>1606970527906</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1606970527906</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Changed FileUpload.ashx to correctly use the FileUpload" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed FileUpload.ashx to correctly use the FileUpload" />
   </component>
 </project>

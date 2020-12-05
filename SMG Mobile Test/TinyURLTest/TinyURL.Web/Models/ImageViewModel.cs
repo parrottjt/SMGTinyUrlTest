@@ -34,9 +34,11 @@ namespace TinyURL.Web.Models
             }
         }
 
-        public void ValidateFile(HttpPostedFile webImage, out string path, out bool fileExists, out string validationMessage)
+        public void ValidateFile(HttpPostedFile webImage)
         {
-            string newFileName = "";
+            string newFileName;
+            string path;
+            bool fileExists;
             try
             {
                 string fileExtension = webImage.FileName.Split('.')[1];
@@ -73,7 +75,7 @@ namespace TinyURL.Web.Models
                     else
                     {
                         newFileName = Path.GetFileName(webImage.FileName);
-                        path = @"UploadedImages\" + webImage.FileName;
+                        path = @"UploadedImages\" + newFileName;
 
 
                         try
@@ -97,12 +99,12 @@ namespace TinyURL.Web.Models
                     }
                 }
 
-                validationMessage = validationStatus;
+                //validationMessage = validationStatus;
             }
             catch (Exception exceptionType)
             {
                 path = "";
-                validationMessage = $"File Couldn't be processed with exception: {exceptionType.Message}";
+                //validationMessage = $"File Couldn't be processed with exception: {exceptionType.Message}";
                 fileExists = true;
             }
 

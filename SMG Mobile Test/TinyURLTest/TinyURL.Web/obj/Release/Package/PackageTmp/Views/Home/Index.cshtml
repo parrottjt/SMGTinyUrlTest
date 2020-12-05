@@ -1,4 +1,5 @@
 ﻿@using System.Activities.Statements
+@using System.Net.Http.Formatting
 @model TinyURL.Web.Models.ImageViewModel
 @{
     ViewBag.Title = "Upload Image";
@@ -11,14 +12,30 @@
     string pathToImage = "";
     string validationMessage = "";
 
-    //This handles the post from the Upload button
+
+
     //if (IsPost)
     //{
-    //    photo = WebImage.GetImageFromRequest();
-    //    if (photo != null)
+    //    if (Request.Files.Count > 0)
     //    {
-    //        //This Validates the file to ensure it is of the proper format
-    //        Model.ValidateFile(photo, out pathToImage, out fileExists, out validationMessage);
+    //        HttpFileCollectionBase postedFiles = Request.Files;
+    //        foreach (HttpPostedFile postedFile in postedFiles)
+    //        {
+    //            //postedFile.SaveAs(@"~\UploadedImages\" + postedFile.FileName);
+
+
+    //            int length = postedFile.ContentLength;
+    //            byte[] buffer = new byte[length];
+    //            using (var binaryReader = new BinaryReader(postedFile.InputStream))
+    //            {
+    //                buffer = binaryReader.ReadBytes(length);
+    //            }
+
+    //            WebImage image = new WebImage(buffer) { FileName = postedFile.FileName };
+    //            //This Validates the file to ensure it is of the proper format
+    //            Model.ValidateFile(image, out pathToImage, out fileExists, out validationMessage);
+
+    //        }
     //    }
     //}
 
@@ -42,13 +59,13 @@
             <input type="file" name="Image" />
             <br />
             <p id="filesToUploadCount"></p>
-            <br/>
-            <input id="uploadButton" type="submit" value="Upload" />
-            <br/>
+            <br />
+            <input id="uploadButton" type="button" value="Upload" />
+            <br />
             <p>@ViewBag.ValidationStatus</p>
         </fieldset>
     </form>
-    
+
     <!--Move This section to a modal or another page-->
     <h1>Uploaded Image</h1>
     @if (pathToImage != "" && !fileExists)
@@ -102,17 +119,24 @@
             }
             $.ajax({
                 type: "POST",
-                url: "FileUpload.ashx",
+                url: '@Url.Action("Upload", "Home")',
                 contentType: false,
                 processData: false,
                 data: data,
                 success: function(result) {
                     alert(result);
-                },
-                error: function () {
-                    alert("There was an error uploading files");
                 }
             });
+
+            $(document).ajaxStart(function() {
+                $("#uploadButton").prop('disabled', true);
+            });
+
+            $(document).ajaxStop(function () {
+                $("#uploadButton").prop('disabled', false);
+                $("#uploadBox").val("");
+            });
+
         }
     </script>
 }
