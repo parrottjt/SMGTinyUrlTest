@@ -18,15 +18,20 @@ namespace TinyURL.Data.Services
             return false;
         }
 
+        public string ReturnConnectionServer()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public UploadedImage Get(int id)
         {
             return db.FirstOrDefault(image => image.Id == id);
         }
 
         //This is the start for the web scraper
-        public UploadedImage Get(string url)
+        public UploadedImage Get(string fileName)
         {
-            return db.FirstOrDefault(image => image.TinyURL == url);
+            return db.FirstOrDefault(image => image.TinyURL == fileName);
         }
 
         public void AddUploadedImage(UploadedImage uploadedImages)

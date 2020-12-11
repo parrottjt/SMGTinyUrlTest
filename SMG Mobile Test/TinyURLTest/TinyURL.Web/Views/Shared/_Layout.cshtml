@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Tiny Link Test</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="https://kit.fontawesome.com/46fba011ef.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -16,7 +17,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Tiny Url Test Link", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Upload Images", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <span class="col-lg-1"></span>
+                @Html.ActionLink("Image Gallery", "List", "Home",new {area = ""}, new { @class = "navbar-brand" });
             </div>
         </div>
     </div>

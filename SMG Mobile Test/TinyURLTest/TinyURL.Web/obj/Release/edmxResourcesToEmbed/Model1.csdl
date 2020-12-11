@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SMGTestDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="UploadedImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TinyURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NameOfUploader" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="SMGTestDataBaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UploadedImages" EntityType="Self.UploadedImage" />
+  </EntityContainer>
+</Schema>

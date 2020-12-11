@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using TinyURL.Data.Models;
 
@@ -21,19 +19,14 @@ namespace TinyURL.Data.Services
             return images;
         }
 
-        public bool IsConnectionValid()
-        {
-            return db.Database.Exists();
-        }
-
         public UploadedImage Get(int id)
         {
             return db.UploadedImages.FirstOrDefault(image => image.Id == id);
         }
 
-        public UploadedImage Get(string url)
+        public UploadedImage Get(string fileName)
         {
-            return db.UploadedImages.FirstOrDefault(image => image.TinyURL == url);
+            return db.UploadedImages.FirstOrDefault(image => image.FileName == fileName);
         }
 
         public void AddUploadedImage(UploadedImage uploadedImages)

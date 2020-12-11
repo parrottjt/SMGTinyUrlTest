@@ -11,6 +11,8 @@ namespace TinyURL.Web.Models
 {
     public class ImageViewModel
     {
+        public List<string> FileNames { get; set; }
+
         public string CreateTinyUrl(string url)
         {
             try
@@ -34,14 +36,12 @@ namespace TinyURL.Web.Models
             }
         }
 
-        public void ValidateFile(HttpPostedFile webImage)
+        public void ValidateFile(HttpPostedFileBase file, string uploadPath)
         {
             string newFileName;
-            string path;
             bool fileExists;
             try
             {
-                string fileExtension = webImage.FileName.Split('.')[1];
                 List<string> validExtensions = new List<string>
                 {
                 "heic",
@@ -56,58 +56,30 @@ namespace TinyURL.Web.Models
                 };
 
                 string validationStatus;
-
-                path = "Not Valid";
+                string fileExtension = file.FileName.Split('.')[1];
 
                 if (!validExtensions.Contains(fileExtension.ToLower()))
                 {
-                    validationStatus = $"Valid webImage types are HEIC/HEIF, WEBP, PNG, JPEG, SVG, PDF, JPG & GIF\n" +
+                    validationStatus = $"Valid file types are HEIC/HEIF, WEBP, PNG, JPEG, SVG, PDF, JPG & GIF\n" +
                                        $"File uploaded had type {fileExtension}";
-                    fileExists = true;
                 }
                 else
                 {
-                    if (webImage.ContentLength > 10000000)
+                    if (file.ContentLength > 10000000)
                     {
                         validationStatus = "Upload size limited to 10MB";
-                        fileExists = true;
                     }
                     else
                     {
-                        newFileName = Path.GetFileName(webImage.FileName);
-                        path = @"UploadedImages\" + newFileName;
-
-
-                        try
-                        {
-                            HttpWebRequest.Create("smgtinyurltest.azurewebsites.net/" + path).GetResponse();
-                            fileExists = true;
-
-                            validationStatus = "File has already been uploaded to server";
-                        }
-                        catch
-                        {
-                            fileExists = false;
-
-                            validationStatus = "File uploaded successful";
-                        }
-
-                        if (!fileExists)
-                        {
-                            webImage.SaveAs(@"~\" + path);
-                        }
+                        file.SaveAs(uploadPath + file.FileName);
                     }
                 }
-
-                //validationMessage = validationStatus;
             }
             catch (Exception exceptionType)
             {
-                path = "";
-                //validationMessage = $"File Couldn't be processed with exception: {exceptionType.Message}";
-                fileExists = true;
-            }
 
+                //validationMessage = $"File Couldn't be processed with exception: {exceptionType.Message}";
+            }
         }
     }
 }

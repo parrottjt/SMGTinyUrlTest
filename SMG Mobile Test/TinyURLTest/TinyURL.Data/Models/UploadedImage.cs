@@ -5,5 +5,6 @@
         public int Id { get; set; }
         public string FileName { get; set; }
         public string TinyURL { get; set; }
+        public string NameOfUploader { get; set; }
     }
 }

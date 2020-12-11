@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TinyURL.Data.Models;
 
 namespace TinyURL.Data.Services
@@ -7,11 +6,8 @@ namespace TinyURL.Data.Services
     public interface IUploadedImage
     {
         IEnumerable<UploadedImage> GetAll();
-        bool IsConnectionValid();
         UploadedImage Get(int id);
-        UploadedImage Get(string url);
+        UploadedImage Get(string fileName);
         void AddUploadedImage(UploadedImage uploadedImages);
-        void UpdateUploadedImage(UploadedImage uploadedImages);
-        void DeleteUploadedImage(UploadedImage uploadedImages);
     }
 }

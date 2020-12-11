@@ -22,3 +22,34 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Personal CSS added for elements */
+.photoDiv {
+    position: relative;
+    width: 50%;
+    display: inline-block;
+    padding: 10px;
+}
+
+
+    /* Make the image responsive */
+    .photoDiv img {
+        width: 100%;
+        
+    }
+
+    /* Style the button and place it in the middle of the container/image */
+    .photoDiv .removeTemp {
+        position: absolute;
+        top: 5%;
+        left: 95%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: firebrick;
+        color: white;
+        font-size: 16px;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 30px;
+    }

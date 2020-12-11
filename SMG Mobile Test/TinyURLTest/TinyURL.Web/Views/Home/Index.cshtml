@@ -1,54 +1,13 @@
-﻿@using System.Activities.Statements
-@using System.Net.Http.Formatting
-@model TinyURL.Web.Models.ImageViewModel
-@{
+﻿@{
     ViewBag.Title = "Upload Image";
-
-    WebImage photo = null;
-
-
-    bool fileExists = false;
-
-    string pathToImage = "";
-    string validationMessage = "";
-
-
-
-    //if (IsPost)
-    //{
-    //    if (Request.Files.Count > 0)
-    //    {
-    //        HttpFileCollectionBase postedFiles = Request.Files;
-    //        foreach (HttpPostedFile postedFile in postedFiles)
-    //        {
-    //            //postedFile.SaveAs(@"~\UploadedImages\" + postedFile.FileName);
-
-
-    //            int length = postedFile.ContentLength;
-    //            byte[] buffer = new byte[length];
-    //            using (var binaryReader = new BinaryReader(postedFile.InputStream))
-    //            {
-    //                buffer = binaryReader.ReadBytes(length);
-    //            }
-
-    //            WebImage image = new WebImage(buffer) { FileName = postedFile.FileName };
-    //            //This Validates the file to ensure it is of the proper format
-    //            Model.ValidateFile(image, out pathToImage, out fileExists, out validationMessage);
-
-    //        }
-    //    }
-    //}
-
 }
 
 @{
     // Gathered from https://docs.microsoft.com/en-us/aspnet/web-pages/overview/ui-layouts-and-themes/9-working-with-images
     // Added the tiny url to this location.
 }
+
 <div class="page-header">
-    <p>
-        @Html.ActionLink("List", "List", "Home", new {@class="btn btn"})
-    </p>
     <form action="" method="post" enctype="multipart/form-data">
         <fieldset>
             <legend> Image Upload </legend>
@@ -58,32 +17,61 @@
             </div>
             <input id="fileSelection" type="file" name="Image" multiple="multiple" />
             <br />
-            <p id="filesToUploadCount"></p>
-            <br />
-            <input id="uploadButton" type="button" value="Upload" />
+            <div>
+                <p id="filesToUploadCount"></p>
+                <div id="imagePreviews" style="max-width: 30%">
+
+                </div>
+            </div>
             <br />
             <p>@ViewBag.ValidationStatus</p>
         </fieldset>
     </form>
+    
+    <div >
+        <br />
+        <input class="btn btn-block pull-left" id="uploadButton" type="button" value="Upload" style="background-color: darkgrey; font-size: 16px; font-weight: bold"/>
+        <span class="pull-left">
+            <img id="spinner" src="/Content/Rolling-1s-200px.gif" style="width: 20%"/>
+        </span>
+    </div>
 
-    <!--Move This section to a modal or another page-->
-    <h1>Uploaded Image</h1>
-    @if (pathToImage != "" && !fileExists)
-    {
-        <div class="result">
-            <p>Tiny URL: @Model.CreateTinyUrl(pathToImage)</p>
-            <img src="@pathToImage" alt="image" />
-
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h4 id="myModalTitle" class="modal-title">Preview Image</h4>
+                </div>
+                <div class="modal-content text-center">
+                    <img id="myModalImage" />
+                </div>
+            </div>
         </div>
-    }
+    </div>
 </div>
 
 @section scripts
 {
     <script>
-        var selectedFiles = new [];
+        var selectedFiles = new Array();
+        var guidFolderName = "";
+
 
         $(document).ready(AddEventListeners);
+        $("#spinner").hide();
+
+        $(document).ajaxStart(function() {
+            $("#uploadButton").prop('disabled', true);
+            $("#spinner").show();
+        });
+
+        $(document).ajaxStop(function() {
+            $("#uploadButton").prop('disabled', false);
+            $("#uploadBox").val("");
+            $("#fileSelection").val("");
+            $("#filesToUploadCount").text("");
+        });
 
         function AddEventListeners() {
             var box = document.getElementById("uploadBox");
@@ -91,9 +79,45 @@
             box.addEventListener("dragover", OnDragOver, false);
             box.addEventListener("drop", OnDrop, false);
 
-            $("#uploadButton").click(OnClick);
+            $("#uploadButton").click(UploadToMainFolder);
 
-            $("#fileSelection").addEventListener("oninput", OnInput, false);
+            document.getElementById("fileSelection").addEventListener("input", OnInput, false);
+
+            $('div').on('click',
+                '.removeTemp',
+                function() {
+                    var removalIndex = function(array, id) {
+                        var index = -1;
+                        for (var i = 0; i < array.length; i++) {
+                            if (array[i].name == id) {
+                                index = i;
+                                break;
+                            }
+                        }
+                        return index;
+                    }(selectedFiles, $(this).attr("id"));
+
+                    selectedFiles.splice(removalIndex, 1);
+
+                    var thisIsATest = new Array();
+                    for (var i = 0; i < selectedFiles.length; i++) {
+                        thisIsATest.push(selectedFiles[i].name);
+                    }
+
+                    //alert("What the array has in it " + thisIsATest + "\n The Index of what is removed " + removalIndex + "\n What is trying to be removed " + $(this).attr("id"));
+
+                    var fileCountText = "";
+                    if (selectedFiles.length > 0) {
+                        fileCountText = selectedFiles.length + " file(s) selected for uploading!";
+                    } else {
+                        fileCountText = "";
+                    }
+
+                    $("#filesToUploadCount").text(fileCountText);
+                    $(this).prev().prev().remove();
+                    $(this).prev().remove();
+                    $(this).remove();
+                });
         }
 
         function OnDragEnter(e) {
@@ -110,54 +134,100 @@
             e.stopPropagation();
             e.preventDefault();
 
-            for (var i = 0; i < e.dataTransfer.files.length; i++) {
-                if (!selectedFiles.contains(e.dataTransfer.files[i]) || selectedFiles.length == 0) {
-                    selectedFiles.append(e.dataTransfer.files[i]);
-                }
-            }
+            //selectedFiles = e.dataTransfer.files;
+            var files = e.dataTransfer.files;
 
-            $("#filesToUploadCount").text(selectedFiles.length + "file(s) selected for uploading!");
-        }
-
-        function OnClick(e) {
-            var data = new FormData();
-            for (var i = 0; i < selectedFiles.length; i++) {
-                data.append(selectedFiles[i].name, selectedFiles[i]);
-            }
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("Upload", "Home")',
-                contentType: false,
-                processData: false,
-                data: data,
-                success: function(result) {
-                    alert(result);
-                }
-            });
-
-            $(document).ajaxStart(function() {
-                $("#uploadButton").prop('disabled', true);
-            });
-
-            $(document).ajaxStop(function() {
-                $("#uploadButton").prop('disabled', false);
-                $("#uploadBox").val("");
-            });
-
+            //UploadToTempFolder(files);
+            CreateThumbnailForImages(files);
         }
 
         function OnInput(e) {
             e.stopPropagation();
             e.preventDefault();
 
-            for (var i = 0; i < e.dataTransfer.files.length; i++) {
-                if (!selectedFiles.contains(e.dataTransfer.files[i]) || selectedFiles.length == 0) {
-                    selectedFiles.append(e.dataTransfer.files[i]);
+            var files = e.dataTransfer.files;
+
+            CreateThumbnailForImages(files);
+        }
+
+        function OpenModalWithImage(element) {
+            $("#myModal").modal('show');
+
+            var modalHeader = document.getElementById("myModalTitle");
+            modalHeader.innerHTML = element.id;
+
+            var modalImage = document.getElementById("myModalImage");
+            modalImage.setAttribute("src", element.src);
+        }
+
+        function CreateThumbnailForImages(files) {
+            var thumbnailDiv = document.getElementById("imagePreviews");
+            var canvas = document.createElement("canvas");
+
+            for (var i = 0; i < files.length; i++) {
+
+                if (selectedFiles.length == 0) {
+                    selectedFiles.push(files[i]);
+                }
+
+                if (!selectedFiles.includes(files[i])) {
+                    selectedFiles.push(files[i]);
+                }
+
+                var photoDiv = document.createElement("div");
+                var tempImage = document.createElement("img");
+                var removeTempDiv = document.createElement("div");
+
+                photoDiv.setAttribute("class", "photoDiv");
+                thumbnailDiv.appendChild(photoDiv);
+
+                tempImage.setAttribute("class", "imagePreview");
+                tempImage.setAttribute("onclick", "OpenModalWithImage(this)");
+                photoDiv.appendChild(tempImage);
+
+                removeTempDiv.innerHTML = "X";
+                removeTempDiv.setAttribute("class", "removeTemp");
+                removeTempDiv.setAttribute("id", selectedFiles[selectedFiles.length - 1].name);
+                photoDiv.appendChild(removeTempDiv);
+
+                tempImage.file = files[i];
+                var reader = new FileReader();
+                reader.onload = (function(image) {
+                    return function(e) {
+                        image.src = e.target.result;
+                    };
+                }(tempImage));
+
+                var ret = reader.readAsDataURL(files[i]);
+                tempImage.onload = function() {
+                    canvas.getContext("2d").drawImage(tempImage, 100, 100);
                 }
             }
 
-            $("#filesToUploadCount").text(selectedFiles.length + "file(s) selected for uploading!");
+            $("#filesToUploadCount").text(selectedFiles.length + " file(s) selected for uploading!");
         }
 
+        function UploadToMainFolder() {
+            var data = new FormData();
+           
+            for (var i = 0; i < selectedFiles.length; i++) {
+                data.append(selectedFiles[i].name, selectedFiles[i]);
+            }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("UploadToMainFolder", "Home")',
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (result) {
+                    $("#spinner").hide();
+                    alert(result);
+                    location.href = '@Url.Action("UserUploadedList")';
+                },
+                error: function(result) {
+                    alert(result);
+                }
+            });
+        }
     </script>
 }

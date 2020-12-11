@@ -102,7 +102,7 @@ namespace TinyURL.Web.Controllers
                 {
                     if (file.ContentLength > 10000000)
                     {
-                        validationStatus = "Upload size limited to 10MB";
+                        validationStatus = "UploadToMainFolder size limited to 10MB";
                     }
                     else
                     {
