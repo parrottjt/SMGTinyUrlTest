@@ -27,12 +27,12 @@
             <p>@ViewBag.ValidationStatus</p>
         </fieldset>
     </form>
-    
-    <div >
+
+    <div>
         <br />
-        <input class="btn btn-block pull-left" id="uploadButton" type="button" value="Upload" style="background-color: darkgrey; font-size: 16px; font-weight: bold"/>
+        <input class="btn btn-block pull-left" id="uploadButton" type="button" value="Upload" style="background-color: darkgrey; font-size: 16px; font-weight: bold" />
         <span class="pull-left">
-            <img id="spinner" src="/Content/Rolling-1s-200px.gif" style="width: 20%"/>
+            <img id="spinner" src="/Content/Rolling-1s-200px.gif" style="width: 20%" />
         </span>
     </div>
 
@@ -104,8 +104,6 @@
                         thisIsATest.push(selectedFiles[i].name);
                     }
 
-                    //alert("What the array has in it " + thisIsATest + "\n The Index of what is removed " + removalIndex + "\n What is trying to be removed " + $(this).attr("id"));
-
                     var fileCountText = "";
                     if (selectedFiles.length > 0) {
                         fileCountText = selectedFiles.length + " file(s) selected for uploading!";
@@ -114,7 +112,8 @@
                     }
 
                     $("#filesToUploadCount").text(fileCountText);
-                    $(this).prev().prev().remove();
+
+                    $(this).parent().remove();
                     $(this).prev().remove();
                     $(this).remove();
                 });
@@ -141,12 +140,12 @@
             CreateThumbnailForImages(files);
         }
 
-        function OnInput(e) {
-            e.stopPropagation();
-            e.preventDefault();
+        function OnInput() {
+            //e.stopPropagation();
+            //e.preventDefault();
 
-            var files = e.dataTransfer.files;
-
+            var files = $("#fileSelection").prop("files");
+            
             CreateThumbnailForImages(files);
         }
 
@@ -163,6 +162,10 @@
         function CreateThumbnailForImages(files) {
             var thumbnailDiv = document.getElementById("imagePreviews");
             var canvas = document.createElement("canvas");
+
+            //console.log(files.length);
+
+            if (files.length === 0) return;
 
             for (var i = 0; i < files.length; i++) {
 
@@ -209,7 +212,7 @@
 
         function UploadToMainFolder() {
             var data = new FormData();
-           
+
             for (var i = 0; i < selectedFiles.length; i++) {
                 data.append(selectedFiles[i].name, selectedFiles[i]);
             }
@@ -219,7 +222,7 @@
                 contentType: false,
                 processData: false,
                 data: data,
-                success: function (result) {
+                success: function(result) {
                     $("#spinner").hide();
                     alert(result);
                     location.href = '@Url.Action("UserUploadedList")';
